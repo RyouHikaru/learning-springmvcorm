@@ -9,4 +9,6 @@ public interface UserDAO {
 	int create(User user);
 	
 	List<User> findUsers();
+	
+	User findUser(Integer id);
 }

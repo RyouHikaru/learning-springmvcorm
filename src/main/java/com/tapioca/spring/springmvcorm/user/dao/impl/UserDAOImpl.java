@@ -23,12 +23,19 @@ public class UserDAOImpl implements UserDAO {
 		this.hibernateTemplate = hibernateTemplate;
 	}
 
+	@Override
 	public int create(User user) {
 		Integer result = (Integer) hibernateTemplate.save(user);
 		return result;
 	}
 
+	@Override
 	public List<User> findUsers() {
 		return hibernateTemplate.loadAll(User.class);
+	}
+
+	@Override
+	public User findUser(Integer id) {
+		return hibernateTemplate.get(User.class, id);
 	}
 }

@@ -25,15 +25,22 @@ public class UserServiceImpl implements UserService {
 		this.dao = dao;
 	}
 
+	@Override
 	@Transactional
 	public int save(User user) {
 		return dao.create(user);
 	}
 
+	@Override
 	public List<User> getUsers() {
 		List<User> users = dao.findUsers();
 		Collections.sort(users);
 		return users;
+	}
+
+	@Override
+	public User getUser(Integer id) {
+		return dao.findUser(id);
 	}
 
 }

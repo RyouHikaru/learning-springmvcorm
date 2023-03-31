@@ -8,6 +8,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tapioca.spring.springmvcorm.user.entity.User;
 import com.tapioca.spring.springmvcorm.user.service.UserService;
@@ -36,6 +38,18 @@ public class UserController {
 		List<User> users = userService.getUsers();
 		model.addAttribute("users", users);
 		return "displayUsers";
+	}
+	
+	@RequestMapping("validateEmail")
+	public @ResponseBody String validateEmail(@RequestParam("id") Integer id) {
+		User user = userService.getUser(id);
+		String message = "";
+		
+		if (user != null) {
+			message = "User with ID " + id + " already exists.";
+		}
+		
+		return message;
 	}
 
 	public UserService getUserService() {
